@@ -18,7 +18,7 @@ class HomeCustom extends StatelessWidget{
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("Encuestas"),
+                      const Text("Encuestas"),
                       Container(
                         width: 175,
                         height: 60,
@@ -40,7 +40,7 @@ class HomeCustom extends StatelessWidget{
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("Gastos"),
+                      const Text("Gastos"),
                       Container(
                         width: 175,
                         height: 60,
@@ -65,7 +65,7 @@ class HomeCustom extends StatelessWidget{
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Column(
                   children: [
-                    Text("Buzon de sugerencias"),
+                    const Text("Buzon de sugerencias"),
                      Container(
                       width: double.infinity,
                       height: 90,
@@ -85,7 +85,7 @@ class HomeCustom extends StatelessWidget{
                   ],
                 ),
               ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 
                 children: [

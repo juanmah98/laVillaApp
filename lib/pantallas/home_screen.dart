@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:lavilla/widgets/custom_widget.dart';
+import 'package:lavilla/widgets/custom_widgets.dart';
 
 class HomeScreen extends StatelessWidget{
   const HomeScreen({super.key});
