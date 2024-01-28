@@ -13,26 +13,10 @@ class CustomCardFunctions extends StatelessWidget {
 
     final size = MediaQuery.of(context).size;
 
-    return /* const Card(
-      elevation: 30,
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(25)),
-            child: Image(
-                width: double.infinity,
-                fit: BoxFit.cover,
-                height: 120,
-                image: NetworkImage('https://img.freepik.com/fotos-premium/hermosa-casa-naranja-exterior-increible-vista-frente-casa_884986-88.jpg')),
-          )
-        ],
-      ),
-    ); */
-
-     Container(
+    return Container(
       width: double.infinity,
       height: 120,
-      child: Swiper(itemCount: 6,
+      child: Swiper(itemCount: 1,
       layout: SwiperLayout.DEFAULT,
       itemWidth: size.width * 0.6,
       itemHeight: size.height * 0.8,
