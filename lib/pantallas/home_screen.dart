@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget{
         title: const Text("Home"),
         elevation: 0,
       ), */
-      backgroundColor: Color.fromARGB(255, 199, 199, 199),
+      backgroundColor: Color.fromARGB(255, 236, 236, 236),
       body: Column(
         children: [
           CustomAppBar(),

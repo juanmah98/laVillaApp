@@ -57,15 +57,16 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final size = MediaQuery.of(context).size;
     return Container(
       width: double.infinity,
-      height: 350,
+      height: size.height * 0.5, //400 sino
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.5),
+            color: const Color.fromARGB(255, 118, 118, 118).withOpacity(0.5),
             spreadRadius: 2,
             blurRadius: 5,
             offset: const Offset(0, 2),
@@ -75,7 +76,7 @@ class CustomAppBar extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -143,28 +144,13 @@ class CustomAppBar extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  child: Container(
-                    width: double.infinity,
-                    height: 120,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(25),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                  ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  child: CustomCardFunctions()
                 ),
               ],
             ),
-            const Padding(
+            /* const Padding(
               padding: EdgeInsets.symmetric(vertical: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -196,7 +182,7 @@ class CustomAppBar extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ) */
           ],
         ),
       ),
