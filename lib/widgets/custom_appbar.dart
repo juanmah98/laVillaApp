@@ -1,13 +1,14 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:lavilla/widgets/custom_widgets.dart';
+import 'package:lavilla/listas/villas_swiper.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
 
-  void displayCard(BuildContext context) {
+  void displayCard(BuildContext context, {required String linkUrl}) {
     showDialog(
         barrierDismissible: true,
         context: context,
@@ -19,7 +20,7 @@ class CustomAppBar extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 InkWell(
-                  onTap: () => _openGoogleMaps(context),
+                  onTap: () => _openGoogleMaps(context, linkUrl: linkUrl),
                   child: const Card(
                     elevation: 30,
                     child: Column(
@@ -46,6 +47,7 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+     final List<SwiperItem> swiperItems = SwiperItem.getSwiperItems();
     return Container(
       width: double.infinity,
       height: size.height * 0.5, //400 sino
@@ -75,7 +77,7 @@ class CustomAppBar extends StatelessWidget {
               width: double.infinity,
               height: size.height * 0.36,
               child: Swiper(
-                itemCount: 6,
+                itemCount: swiperItems.length,
                 layout: SwiperLayout.DEFAULT,
                 itemWidth: size.width * 0.6,
                 itemHeight: size.height * 0.8,
@@ -90,6 +92,7 @@ class CustomAppBar extends StatelessWidget {
                       size: 8, // Tamaño de los indicadores no seleccionados
                     )),
                 itemBuilder: (_, int index) {
+                   final item = swiperItems[index];
                   return GestureDetector(
                     /* onTap: () => Navigator.push(context, _), */
                     child: ClipRRect(
@@ -99,19 +102,19 @@ class CustomAppBar extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                             child: InkWell(
-                              onTap: () => displayCard(context),
+                              onTap: () => displayCard(context, linkUrl: item.linkVillaUrl),
                               child: Card(
                                 elevation: 0,
                                 child: ClipRRect(
                                   borderRadius: const BorderRadius.all(Radius.circular(25)),
                                   child: ImageFiltered(
                                      imageFilter: ui.ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
-                                    child: const Image(
+                                    child: Image(
                                       alignment: Alignment.topCenter,
                                         width: double.infinity,
                                         fit: BoxFit.cover,
                                         height: 93,
-                                        image: NetworkImage('https://img.freepik.com/fotos-premium/hermosa-casa-naranja-exterior-increible-vista-frente-casa_884986-88.jpg')),
+                                        image: NetworkImage(item.imageVillaUrl)),
                                   ),
                                 ),
                               ),
@@ -120,17 +123,17 @@ class CustomAppBar extends StatelessWidget {
                            Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                             child: InkWell(
-                              onTap: () => _driveFotos(context),
-                              child: const Card(
+                              onTap: () => _driveFotos(context, linkUrl: item.linkDriveUrl),
+                              child: Card(
                                 elevation: 0,
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                                  borderRadius: const BorderRadius.all(Radius.circular(25)),
                                   child: Image(
                                     alignment: Alignment.center,
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                       height: 148,
-                                      image: NetworkImage('https://drive.google.com/uc?export=view&id=1HlqLtPlyIeWc1G_v1YAfCfcZIELubnAd')),
+                                      image: NetworkImage(item.imageDriveUrl)),
                                 ),
                               ),
                             ),
@@ -149,8 +152,8 @@ class CustomAppBar extends StatelessWidget {
   }
 
 
-  void _openGoogleMaps(BuildContext context) async {
-    const String mapUrl = "https://maps.app.goo.gl/x3nY7ZzNXsY4iF7UA";
+  void _openGoogleMaps(BuildContext context, {required String linkUrl}) async {
+     String mapUrl = linkUrl;
 
     // ignore: deprecated_member_use
     if (await canLaunch(mapUrl)) {
@@ -162,8 +165,8 @@ class CustomAppBar extends StatelessWidget {
     }
   }
 
-  void _driveFotos(BuildContext context) async {
-    const String url = "https://drive.google.com/drive/folders/18hNZqdmp0aL-GuEadGDaWIUTjlQviZnO";
+  void _driveFotos(BuildContext context, {required String linkUrl}) async {
+     String url = linkUrl;
 
     // ignore: deprecated_member_use
     if (await canLaunch(url)) {
