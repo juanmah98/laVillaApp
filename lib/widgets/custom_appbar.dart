@@ -1,13 +1,17 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:lavilla/models/la_villa_response.dart';
 import 'package:lavilla/widgets/custom_widgets.dart';
 import 'package:lavilla/listas/villas_swiper.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
+   final List<LaVillaResponse> villas;
 
+  const CustomAppBar({super.key, required this.villas});
+
+ 
   void displayCard(BuildContext context, {required String linkUrl}) {
     showDialog(
         barrierDismissible: true,
@@ -47,6 +51,17 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
+    if(this.villas.length == 0){
+      return Container(
+        width: double.infinity,
+         height: size.height * 0.5,
+         child: Center(
+          child: CircularProgressIndicator())
+          ,
+      );
+    }
+
      final List<SwiperItem> swiperItems = SwiperItem.getSwiperItems();
     return Container(
       width: double.infinity,
@@ -77,7 +92,7 @@ class CustomAppBar extends StatelessWidget {
               width: double.infinity,
               height: size.height * 0.36,
               child: Swiper(
-                itemCount: swiperItems.length,
+                itemCount: 2,
                 layout: SwiperLayout.DEFAULT,
                 itemWidth: size.width * 0.6,
                 itemHeight: size.height * 0.8,
@@ -93,6 +108,7 @@ class CustomAppBar extends StatelessWidget {
                     )),
                 itemBuilder: (_, int index) {
                    final item = swiperItems[index];
+                   final villa = villas[index];
                   return GestureDetector(
                     /* onTap: () => Navigator.push(context, _), */
                     child: ClipRRect(
@@ -102,7 +118,7 @@ class CustomAppBar extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                             child: InkWell(
-                              onTap: () => displayCard(context, linkUrl: item.linkVillaUrl),
+                              onTap: () => displayCard(context, linkUrl: villa.url),
                               child: Card(
                                 elevation: 0,
                                 child: ClipRRect(
@@ -114,7 +130,7 @@ class CustomAppBar extends StatelessWidget {
                                         width: double.infinity,
                                         fit: BoxFit.cover,
                                         height: 93,
-                                        image: NetworkImage(item.imageVillaUrl)),
+                                        image: NetworkImage(villa.fotoFondo)),
                                   ),
                                 ),
                               ),
@@ -123,7 +139,7 @@ class CustomAppBar extends StatelessWidget {
                            Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                             child: InkWell(
-                              onTap: () => _driveFotos(context, linkUrl: item.linkDriveUrl),
+                              onTap: () => _driveFotos(context, linkUrl: villa.urlDrive),
                               child: Card(
                                 elevation: 0,
                                 child: ClipRRect(
@@ -133,7 +149,7 @@ class CustomAppBar extends StatelessWidget {
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                       height: 148,
-                                      image: NetworkImage(item.imageDriveUrl)),
+                                      image: NetworkImage(villa.fotoDriveUrl)),
                                 ),
                               ),
                             ),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:lavilla/pantallas/home_screen.dart';
 import 'dart:ui' as ui;
 
-import 'package:lavilla/widgets/custom_google_maps.dart';
 
 class CustomCardFunctions extends StatelessWidget {
   const CustomCardFunctions({Key? key}) : super(key: key);

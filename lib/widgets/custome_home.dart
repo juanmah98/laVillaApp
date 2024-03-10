@@ -7,7 +7,7 @@ class HomeCustom extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-   return Column(children: <Widget>[
+   return const Column(children: <Widget>[
   /*  Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(

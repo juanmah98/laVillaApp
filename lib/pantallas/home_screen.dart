@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:lavilla/providers/lavilla_provider.dart';
 import 'package:lavilla/widgets/custom_widgets.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget{
   const HomeScreen({super.key});
@@ -8,6 +10,11 @@ class HomeScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+
+final villasProvider = Provider.of<LavillaProvider>(context);
+
+  print(villasProvider.onDisplayVillas);
+
     return Scaffold(
       /* appBar: AppBar(
         title: const Text("Home"),
@@ -33,8 +40,15 @@ class HomeScreen extends StatelessWidget{
               ],
             ),
           ),
-           child: const Column(
-            children: [CustomAppBar(), HomeCustom()],
+           child: Column(
+            children: [
+                // App bar principal customizado
+                CustomAppBar(villas: villasProvider.onDisplayVillas), 
+                
+                // Home principal customizado
+                HomeCustom()
+            
+            ],
           ),
       )
       
