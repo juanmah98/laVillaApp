@@ -1,5 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:lavilla/estilos/styles.dart';
 import 'package:lavilla/models/la_villa_response.dart';
 import 'package:lavilla/widgets/custom_widgets.dart';
 import 'package:lavilla/listas/villas_swiper.dart';
@@ -121,17 +122,68 @@ class CustomAppBar extends StatelessWidget {
                               onTap: () => displayCard(context, linkUrl: villa.url),
                               child: Card(
                                 elevation: 0,
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.all(Radius.circular(25)),
-                                  child: ImageFiltered(
-                                     imageFilter: ui.ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
-                                    child: Image(
-                                      alignment: Alignment.topCenter,
-                                        width: double.infinity,
-                                        fit: BoxFit.cover,
-                                        height: 93,
-                                        image: NetworkImage(villa.fotoFondo)),
+                                child: Stack(
+                                  children: [
+                                    ClipRRect(
+                                    borderRadius: const BorderRadius.all(Radius.circular(25)),
+                                    child: ImageFiltered(
+                                       imageFilter: ui.ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
+                                      child: Image(
+                                        alignment: Alignment.topCenter,
+                                          width: double.infinity,
+                                          fit: BoxFit.cover,
+                                          height: 93,
+                                          image: NetworkImage(villa.fotoFondo)),
+                                    ),
                                   ),
+                                   Positioned.fill(
+                                    child: Container(
+                                      color: Colors.white.withOpacity(0.6), // Cambia el color y la opacidad según lo desees
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 2),
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                             decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10), // Ajusta el radio de borde según tus necesidades
+                                              color: AppColors.primaryGrey, // Cambia el color de fondo según tus necesidades
+                                            ),
+                                            padding: EdgeInsets.symmetric(vertical: 2, horizontal: 10), // Ajusta el espaciado interno según tus necesidades
+                                            child: Text(
+                                              villa.anno.toString(),
+                                              style: TextStyle(
+                                               
+                                                fontSize: 12,
+                                                color: AppColors.primaryWhite,
+                                              ),
+                                            ),
+                                          ),
+                                          Text(
+                                            villa.apodoNombre,
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.bold,
+                                              color: AppColors.primaryGrey,
+                                            ),
+                                          ),
+                                          SizedBox(height: 8), // Espacio entre el título y el texto adicional
+                                          Text(
+                                            'Más información aquí',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              color: AppColors.primaryGrey,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ]
                                 ),
                               ),
                             ),
